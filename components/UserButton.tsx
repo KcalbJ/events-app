@@ -1,8 +1,8 @@
-import avatarPlaceholder from "../public/avatar_placeholder.png"
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { LogOut, Settings } from "lucide-react";
+import { LogOut, Settings, Lock} from "lucide-react";
 import { User } from "next-auth";
-import Image from "next/image";
+
 import Link from "next/link";
 import { Button } from "./ui/button";
 import {
@@ -43,6 +43,12 @@ export default function UserButton({ user }: UserButtonProps) {
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>
+         {user.role === "admin" && <DropdownMenuItem asChild>
+                <Link href="/admin">
+                  <Lock className="mr-2 h-4 w-4" />
+                  Admin
+                </Link>
+              </DropdownMenuItem> }
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
