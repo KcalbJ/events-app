@@ -1,6 +1,5 @@
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { LogOut, Settings, Lock} from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LogOut, Settings, Lock } from "lucide-react";
 import { User } from "next-auth";
 
 import Link from "next/link";
@@ -25,12 +24,10 @@ export default function UserButton({ user }: UserButtonProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" className="flex-none rounded-full">
-        <Avatar>
-  <AvatarImage src={user.image} />
-  <AvatarFallback>CN</AvatarFallback>
-</Avatar>
-
-
+          <Avatar>
+            <AvatarImage src={user.image} />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
@@ -43,12 +40,14 @@ export default function UserButton({ user }: UserButtonProps) {
               <span>Settings</span>
             </Link>
           </DropdownMenuItem>
-         {user.role === "admin" && <DropdownMenuItem asChild>
-                <Link href="/admin">
-                  <Lock className="mr-2 h-4 w-4" />
-                  Admin
-                </Link>
-              </DropdownMenuItem> }
+          {user.role === "admin" && (
+            <DropdownMenuItem asChild>
+              <Link href="/admin">
+                <Lock className="mr-2 h-4 w-4" />
+                Admin
+              </Link>
+            </DropdownMenuItem>
+          )}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
