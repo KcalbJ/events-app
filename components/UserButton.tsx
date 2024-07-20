@@ -26,7 +26,7 @@ export default function UserButton({ user }: UserButtonProps) {
         <Button size="icon" className="flex-none rounded-full">
           <Avatar>
             <AvatarImage src={user.image} />
-            <AvatarFallback>CN</AvatarFallback>
+            <AvatarFallback>IN</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
