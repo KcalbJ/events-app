@@ -1,44 +1,17 @@
-'use client'
+
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
-import { useEffect, useState } from "react";
-type Event = {
-  id: string;
-  name: string;
-  description: string;
-  date: string;
-  location: string;
-  price: number;
-  imgUrl: string;
-};
+import prisma from "@/lib/prisma"
 
-export default function Page() {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch("/api/events");
-        if (response.ok) {
-          const data: Event[] = await response.json();
-          setEvents(data);
-        } else {
-          console.error("Failed to fetch events");
-        }
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchEvents();
-  }, []);
-
+export default async function Page() {
+ 
+  
+  const events  = await prisma.event.findMany();
+  
   return (
     <div className="flex flex-col min-h-dvh">
       <section className="bg-primary py-12 md:py-20">
@@ -124,12 +97,7 @@ export default function Page() {
           </Accordion>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {loading ? (
-            <p>Loading...</p>
-          ) : events.length === 0 ? (
-            <p>No events found.</p>
-          ) : (
-            events.map((event) => (
+          {events.map((event) => (
               <Card key={event.id} className="overflow-hidden">
                 <img
                   src={event.imgUrl || "/placeholder.svg"}
@@ -142,18 +110,17 @@ export default function Page() {
                   <h3 className="text-lg font-semibold">{event.name}</h3>
                   <p className="text-muted-foreground">{new Date(event.date).toLocaleDateString()}</p>
                   <p className="text-muted-foreground">{event.location}</p>
-                  <p className="text-muted-foreground">${event.price.toFixed(2)}</p>
+                  <p className="text-muted-foreground">£{event.price ? event.price : " free"}</p>
                   <Link
-                    href="#"
+                    href={`/events/${event.id}`}
                     className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-                    prefetch={false}
-                  >
+                     >
                     Learn More
                   </Link>
                 </CardContent>
               </Card>
             ))
-          )}
+}
         </div>
       </main>
     </div>

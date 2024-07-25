@@ -1,63 +1,20 @@
 'use client'
-import { useState } from 'react';
-import { redirect } from "next/navigation";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
-import { CalendarDays } from "lucide-react"
-import { Calendar } from "./ui/calendar"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
-import { format } from "date-fns"
+import { useActionState, useState } from "react";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
+import { CalendarDays } from "lucide-react";
+import { Calendar } from "./ui/calendar";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+import { createEvent } from "@/app/settings/actions";
+
 
 export default function EventForm() {
-  const [formData, setFormData] = useState({
-    name: '',
-    date:'',
-    time: '',
-    location: '',
-    description: '',
-    category: '',
-    imgUrl: '',
-    price: '',
-  });
- 
-
-  const handleInputChange = (e) => {
-    const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
-  };
-  const handleCategoryChange = (value) => {
-    setFormData({ ...formData, category: value });
-  };
-
-  const handleDateChange = (date) => {
-    setFormData({ ...formData, date: date }); 
-  };
-
-  
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch('/api/events/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        ...formData,
-        date: new Date(formData.date).toISOString(), 
-      }),
-    });
-    if (response.ok) {
-      redirect('/events'); 
-    } else {
-      console.error('Failed to create event');
-    }
-  };
-
+  const [selectedDate, setSelectedDate] = useState(null);
+  // const [error, action, isPending] = useActionState(createEvent, null)
   return (
     <Card className="max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
       <CardHeader>
@@ -65,13 +22,13 @@ export default function EventForm() {
         <CardDescription>Fill out the details for your upcoming event.</CardDescription>
       </CardHeader>
       <CardContent>
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSubmit}>
+        <form action={createEvent} className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="grid gap-4">
             <div className="grid gap-2">
               <Label htmlFor="name" className="text-sm font-medium">
                 Event Name
               </Label>
-              <Input id="name" placeholder="Summer Picnic" value={formData.name} onChange={handleInputChange} />
+              <Input id="name" placeholder="Summer Picnic" name="name" />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
@@ -82,43 +39,39 @@ export default function EventForm() {
                   <PopoverTrigger asChild>
                     <Button variant="outline" className="w-full justify-start font-normal">
                       <CalendarDays className="mr-2 h-4 w-4" />
-                      {formData.date ? format(formData.date, "PPP") : <span>Pick a date</span>}
+                      {selectedDate ? selectedDate.toDateString() : "Pick a date"}
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0" align="start">
-                  <Calendar 
-                      mode="single"
-                      selected={formData.date ? new Date(formData.date) : undefined}
-                      onSelect={handleDateChange}
-                      initialFocus
-                    />
+                    <Calendar mode="single" selected={selectedDate} onSelect={setSelectedDate} />
                   </PopoverContent>
                 </Popover>
+                <input type="hidden" name="date" value={selectedDate ? selectedDate.toISOString() : ''} />
               </div>
               <div className="grid gap-2">
                 <Label htmlFor="time" className="text-sm font-medium">
                   Time
                 </Label>
-                <Input id="time" type="time" value={formData.time} onChange={handleInputChange} />
+                <Input id="time" type="time" name="time" />
               </div>
             </div>
             <div className="grid gap-2">
               <Label htmlFor="location" className="text-sm font-medium">
                 Location
               </Label>
-              <Input id="location" placeholder="123 Fleet street, Anytown GB" value={formData.location} onChange={handleInputChange} />
+              <Input id="location" name="location" placeholder="123 Fleet street, Anytown GB" />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="description" className="text-sm font-medium">
                 Description
               </Label>
-              <Textarea id="description" rows={5} placeholder="Describe your event..." value={formData.description} onChange={handleInputChange} />
+              <Textarea id="description" rows={5} placeholder="Describe your event..." name="description" />
             </div>
             <div className="grid gap-2">
               <Label htmlFor="category" className="text-sm font-medium">
                 Category
               </Label>
-              <Select value={formData.category} onValueChange={handleCategoryChange}>
+              <Select name="category">
                 <SelectTrigger>
                   <SelectValue placeholder="Select a category" />
                 </SelectTrigger>
@@ -136,7 +89,7 @@ export default function EventForm() {
               <Label htmlFor="price" className="text-sm font-medium">
                 Price
               </Label>
-              <Input id="price" placeholder="100.00" value={formData.price} onChange={handleInputChange} />
+              <Input id="price" placeholder="100.00" name="price" type="number" />
             </div>
           </div>
           <div className="grid gap-4">
@@ -144,12 +97,12 @@ export default function EventForm() {
               <Label htmlFor="image" className="text-sm font-medium">
                 Event Image
               </Label>
-              <Input id="imgUrl" placeholder="https://example.com/image.jpg" value={formData.imgUrl} onChange={handleInputChange} />
+              <Input id="imgUrl" placeholder="https://example.com/image.jpg" name="imgUrl" />
             </div>
           </div>
           <CardFooter>
             <div className="flex justify-end">
-              <Button type="submit">Create Event</Button>
+              <Button  type="submit">Create Event</Button>
             </div>
           </CardFooter>
         </form>
@@ -157,3 +110,4 @@ export default function EventForm() {
     </Card>
   );
 }
+

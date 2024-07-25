@@ -3,8 +3,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select"
 import { Calendar, Clock, MapPinned, TicketIcon } from "lucide-react"
-
-export default function Page() {
+import prisma from "@/lib/prisma"
+export default async function Page({params}) {
+  const event = prisma.event.findUnique({
+    where: {
+      id: params.id    },
+  })
   return (
     <div className="bg-background text-foreground min-h-dvh flex flex-col">
       <main className="flex-1 py-12 md:py-16 lg:py-20">
@@ -29,7 +33,7 @@ export default function Page() {
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                       <MapPinned className="w-5 h-5" />
-                      <span>123 Main St, Anytown USA</span>
+                      <span>123 SESAME</span>
                     </div>
                   </div>
                 </div>
@@ -57,17 +61,7 @@ export default function Page() {
                 <div>
                   <h2 className="text-2xl font-semibold">Sign Up</h2>
                   <form className="mt-4 space-y-4">
-                    <Input type="text" placeholder="Name" />
-                    <Input type="email" placeholder="Email" />
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Ticket Type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="early-bird">Early Bird Ticket (99)</SelectItem>
-                        <SelectItem value="regular">Regular Ticket (149)</SelectItem>
-                      </SelectContent>
-                    </Select>
+                
                     <Button type="submit" className="w-full">
                       Sign Up
                     </Button>
