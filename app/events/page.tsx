@@ -108,9 +108,12 @@ export default async function Page() {
                 />
                 <CardContent className="p-4 space-y-2">
                   <h3 className="text-lg font-semibold">{event.name}</h3>
-                  <p className="text-muted-foreground">{new Date(event.date).toLocaleDateString()}</p>
+                  <p className="text-muted-foreground">{event.category}</p>
+                  <p className="text-muted-foreground">{new Date(event.startDateTime).toLocaleDateString()}</p>
+                  <p className="text-muted-foreground">{new Date(event.endDateTime).toLocaleDateString()}</p>
                   <p className="text-muted-foreground">{event.location}</p>
-                  <p className="text-muted-foreground">£{event.price ? event.price : " free"}</p>
+                  
+                  <p className="text-muted-foreground">£{event.price !== 0 ? event.price : " free"}</p>
                   <Link
                     href={`/events/${event.id}`}
                     className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"

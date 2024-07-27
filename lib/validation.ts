@@ -6,18 +6,16 @@ export const updateProfileSchema = z.object({
 
 export type UpdateProfileValues = z.infer<typeof updateProfileSchema>;
 
-// export const createEventSchema = z.object({
-//   name: z.string().trim().min(1, "Name cannot be empty"),
-//   description: z.string().trim().min(1, "Description cannot be empty"),
-//   date: z.string().refine((date) => !isNaN(Date.parse(date)), {
-//     message: "Invalid date format",
-//   }),
-//   location: z.string().trim().min(1, "Location cannot be empty"),
-//   price: z.string().refine((price) => !isNaN(parseFloat(price)), {
-//     message: "Invalid price format",
-//   }),
-//   imgUrl: z.string().url("Invalid URL format"),
-//   category: z.string().trim().min(1, "Category cannot be empty"),
-// });
+export const createEventSchema = z.object({
+  name: z.string().trim().min(3, "Name cannot be empty"),
+  description: z.string().trim().min(3, "Description cannot be empty").max(400, "Description mus be less than 400 characters"),
+  startDateTime: z.date(),
+  endDateTime: z.date(),
+  location: z.string().trim().min(3, "Location cannot be empty").max(400, "Location cannot be more than than 400 characters"),
+  price: z.number(),
+  imgUrl: z.string().url("Invalid URL format"),
+  isFree: z.boolean(),
+  category: z.string().trim().min(3, "Category cannot be empty"),
+});
 
-// export type CreateEventValues = z.infer<typeof createEventSchema>;
+export type CreateEventValues = z.infer<typeof createEventSchema>;

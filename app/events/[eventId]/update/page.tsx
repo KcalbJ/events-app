@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import getSession from "@/lib/getSession";
 import EventForm from "@/components/EventForm";
 export const metadata: Metadata = {
-  title: "Create events",
+  title: "Edit event",
 };
 
 export default async function Page() {
@@ -21,7 +21,7 @@ export default async function Page() {
 
   return (
     <main className="mx-auto my-10 space-y-3">
-      <EventForm type="Create"/>  
+      <EventForm type="Update"/>  
      </main>
   );
 }
