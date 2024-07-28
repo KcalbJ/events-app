@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import prisma from "@/lib/prisma";
 
 
-export async function createEvent(values: CreateEventValues) {
+export async function updateEvent(values: CreateEventValues, eventId) {
   const session = await auth();
   const userId = session?.user.id;
   const user = session?.user;
@@ -26,8 +26,11 @@ export async function createEvent(values: CreateEventValues) {
   } = createEventSchema.parse(values);
  console.log(values)
   
-    // Attempt to create the event
-    await prisma.event.create({
+    
+    await prisma.event.update({
+        where: {
+            id: eventId,
+          },
       data: {
         name,
         description,

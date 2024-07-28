@@ -3,9 +3,22 @@ import { Button } from "@/components/ui/button"
 
 import { Calendar, Clock, MapPinned, TicketIcon } from "lucide-react"
 import prisma from "@/lib/prisma"
+import { redirect } from "next/navigation";
+import getSession from "@/lib/getSession";
 
+
+import Link from "next/link";
 
 export default async function Page({params}) {
+
+
+  const session = await getSession();
+  const user = session?.user;
+  if(!user){
+    redirect("/api/auth/signin?callbackUrl=/events/create")
+  }
+  
+
   const event = await prisma.event.findUnique({
     where: {
       id: params.eventId,
@@ -16,7 +29,11 @@ export default async function Page({params}) {
       <main className="flex-1 py-12 md:py-16 lg:py-20">
       <div className="container mx-auto max-w-5xl flex items-center justify-between">
           <h1 className="text-3xl font-bold">{event.name}</h1>
-         
+          {user.role === 'admin' && (
+            <Link href={`/events/${event.id}/update`} className="ml-4">
+              Edit Event
+            </Link>
+          )}
         </div>
         <div className="container mx-auto max-w-5xl px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-8">
@@ -31,7 +48,7 @@ export default async function Page({params}) {
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-5 h-5" />
-                      <span>{new Date(event.startDateTime).toLocaleDateString()}</span>
+                      <span>{new Date(event.startDateTime).toLocaleTimeString()}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                       <MapPinned className="w-5 h-5" />

@@ -12,7 +12,7 @@ export const createEventSchema = z.object({
   startDateTime: z.date(),
   endDateTime: z.date(),
   location: z.string().trim().min(3, "Location cannot be empty").max(400, "Location cannot be more than than 400 characters"),
-  price: z.number(),
+  price: z.coerce.number(),
   imgUrl: z.string().url("Invalid URL format"),
   isFree: z.boolean(),
   category: z.string().trim().min(3, "Category cannot be empty"),

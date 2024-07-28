@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
   Card,
   CardHeader,
@@ -13,7 +13,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Router } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -37,45 +37,70 @@ import {
 import { CreateEventValues, createEventSchema } from "@/lib/validation";
 import { useToast } from "@/components/ui/use-toast";
 import { createEvent } from "@/app/events/create/actions";
+import { updateEvent } from "@/app/events/[eventId]/update/actions";
 
 type EventFormProps = {
   type: "Create" | "Update";
-
+  eventId?: string;
+  event?: any;
 };
 
-export default function EventForm({ type }: EventFormProps) {
+const defaultValues = {
+  name: "",
+  description: "",
+  location: "",
+  imgUrl: "",
+  startDateTime: new Date(),
+  endDateTime: new Date(),
+  category: "",
+  price: 0,
+  isFree: false,
+};
+
+export default function EventForm({ type, eventId, event }: EventFormProps) {
   const { toast } = useToast();
+  const router = useRouter();
+  const initialValues = event && type === "Update" ? event : defaultValues;
   const form = useForm<CreateEventValues>({
     resolver: zodResolver(createEventSchema),
-    defaultValues: {
-      name: "",
-      description: "",
-      location: "",
-      imgUrl: "",
-      startDateTime: new Date(),
-      endDateTime: new Date(),
-      category: "",
-      price: 0,
-      isFree: false,
-    },
+    defaultValues: initialValues,
   });
 
   async function onSubmit(values: CreateEventValues) {
-    try {
-      await createEvent(values);
-      toast({ description: "Event Created." });
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        description: "An error occurred. Please try again.",
-      });
+    if (type === "Create") {
+      try {
+        await createEvent(values);
+        toast({ description: "Event Created." });
+        router.push("/events");
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          description: "An error occurred. Please try again.",
+        });
+      }
+    }
+    if (type === "Update") {
+      if (!eventId) {
+        router.back();
+        return;
+      }
+      try {
+        await updateEvent(values, eventId);
+        toast({ description: "Event Updated." });
+        router.push(`/events/${eventId}`);
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          description: "An error occurred. Please try again.",
+        });
+      }
     }
   }
 
   return (
     <Card className="max-w-4xl mx-auto p-6 sm:p-8 md:p-10">
       <CardHeader>
-        <CardTitle className="text-3xl font-bold">Create New Event</CardTitle>
+        <CardTitle className="text-3xl font-bold">{type} Event</CardTitle>
         <CardDescription>
           Fill out the details for your upcoming event.
         </CardDescription>
@@ -288,7 +313,7 @@ export default function EventForm({ type }: EventFormProps) {
               disabled={form.formState.isSubmitting}
               className="button col-span-2 w-full"
             >
-              {form.formState.isSubmitting ? "Submitting..." : "Create Event"}
+              {form.formState.isSubmitting ? "Submitting..." : `${type} Event `}
             </Button>
           </form>
         </Form>
