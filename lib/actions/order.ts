@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import Stripe from 'stripe'
+import { CreateOrderValues, createOrderSchema } from "@/lib/validation";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function checkoutOrder({ order }) {
     const price = order.isFree ? 0 : Number(order.price)* 100
@@ -32,4 +33,31 @@ export default async function checkoutOrder({ order }) {
     } catch (error) {
     throw error;
   }
+}
+
+
+export async function createOrder(values: CreateOrderValues) {
+
+  const {
+    stripeId,
+    eventId,
+    buyerId,
+    totalAmount,
+  } = createOrderSchema.parse(values);
+
+  console.log(values);
+
+  // Attempt to create the order
+  await prisma.order.create({
+    data: {
+      stripeId,
+      eventId,
+      buyerId,
+      totalAmount,
+      createdAt: new Date(),
+    },
+  });
+
+  // Revalidate path if necessary (adjust as per your application needs)
+  // revalidatePath("/orders");
 }

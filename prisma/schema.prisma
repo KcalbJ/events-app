@@ -25,6 +25,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   events        Event[]
+  orders        Order[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -88,9 +89,23 @@ model Event {
   isFree      Boolean @default(false) 
   userId      String
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-
+  orders      Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("events")
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  stripeId    String   @unique
+  totalAmount Float
+  createdAt   DateTime @default(now())
+  eventId     String
+  buyerId     String
+
+  event       Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  buyer       User  @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+
+  @@map("orders")
 }

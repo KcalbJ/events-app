@@ -19,3 +19,15 @@ export const createEventSchema = z.object({
 });
 
 export type CreateEventValues = z.infer<typeof createEventSchema>;
+
+
+
+
+export const createOrderSchema = z.object({
+  stripeId: z.string(),
+  eventId: z.string(),
+  buyerId: z.string(),
+  totalAmount: z.coerce.number(),
+});
+
+export type CreateOrderValues = z.infer<typeof createOrderSchema>;
