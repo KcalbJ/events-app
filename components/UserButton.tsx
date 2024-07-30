@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { LogOut, Settings, Lock } from "lucide-react";
+import { LogOut, Settings, Lock,CalendarCheck } from "lucide-react";
 import { User } from "next-auth";
 
 import Link from "next/link";
@@ -34,6 +34,12 @@ export default function UserButton({ user }: UserButtonProps) {
         <DropdownMenuLabel>{user.name || "User"}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+        <DropdownMenuItem asChild>
+            <Link href="/profile">
+              <CalendarCheck className="mr-2 h-4 w-4" />
+              <span>My Events</span>
+            </Link>
+          </DropdownMenuItem>
           <DropdownMenuItem asChild>
             <Link href="/settings">
               <Settings className="mr-2 h-4 w-4" />

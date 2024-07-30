@@ -2,7 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { redirect } from "next/navigation";
-import Stripe from 'stripe'
+
 import { CreateOrderValues, createOrderSchema } from "@/lib/validation";
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function checkoutOrder({ order }) {
@@ -47,7 +47,7 @@ createdAt} = createOrderSchema.parse(values);
 
   console.log(values);
 
-  // Attempt to create the order
+  
   await prisma.order.create({
     data: {
       stripeId,
@@ -58,6 +58,6 @@ createdAt} = createOrderSchema.parse(values);
     },
   });
 
-  // Revalidate path if necessary (adjust as per your application needs)
+  
   // revalidatePath("/orders");
 }

@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Croissant, Dumbbell, Music, Palette, School, Users } from "lucide-react";
+import UpcomingEvents from "@/components/UpcomingEvents";
 
 export default async function Home() {
 
@@ -39,84 +40,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container space-y-12 px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
-              <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">Featured Events</div>
-                <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">Upcoming Community Events</h2>
-                <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Check out some of the most popular upcoming events in your area.
-                </p>
-              </div>
-            </div>
-            <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-12 lg:max-w-5xl lg:grid-cols-3">
-              <Card className="border-0 rounded-none shadow-none">
-                <CardContent className="p-0">
-                  <img
-                    src="/placeholder.svg"
-                    width="400"
-                    height="225"
-                    alt="Event"
-                    className="object-cover aspect-video "
-                  />
-                </CardContent>
-                <CardFooter className="grid gap-2 p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-lg font-medium">Community Cleanup Day</div>
-                    <div className="text-sm text-muted-foreground">June 10, 2023</div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">Riverside Park</div>
-                    <div className="text-sm text-muted-foreground">10:00 AM - 2:00 PM</div>
-                  </div>
-                </CardFooter>
-              </Card>
-              <Card className="border-0 rounded-none shadow-none">
-                <CardContent className="p-0">
-                  <img
-                    src="/placeholder.svg"
-                    width="400"
-                    height="225"
-                    alt="Event"
-                    className="object-cover aspect-video"
-                  />
-                </CardContent>
-                <CardFooter className="grid gap-2 p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-lg font-medium">Cooking Class: Healthy Meals</div>
-                    <div className="text-sm text-muted-foreground">July 15, 2023</div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">Community Center</div>
-                    <div className="text-sm text-muted-foreground">6:30 PM - 8:30 PM</div>
-                  </div>
-                </CardFooter>
-              </Card>
-              <Card className="border-0 rounded-none shadow-none">
-                <CardContent className="p-0">
-                  <img
-                    src="/placeholder.svg"
-                    width="400"
-                    height="225"
-                    alt="Event"
-                    className="object-cover aspect-video"
-                  />
-                </CardContent>
-                <CardFooter className="grid gap-2 p-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-lg font-medium">Outdoor Movie Night</div>
-                    <div className="text-sm text-muted-foreground">August 5, 2023</div>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">Town Square</div>
-                    <div className="text-sm text-muted-foreground">8:00 PM - 11:00 PM</div>
-                  </div>
-                </CardFooter>
-              </Card>
-            </div>
-          </div>
-        </section>
+      <UpcomingEvents/>
         <section className="w-full py-12 md:py-24 lg:py-32 bg-muted">
           <div className="container space-y-12 px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
