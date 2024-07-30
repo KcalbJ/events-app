@@ -1,22 +1,20 @@
 
-import { Button } from "@/components/ui/button"
 
 import { Calendar, Clock, MapPinned, TicketIcon } from "lucide-react"
 import prisma from "@/lib/prisma"
-import { redirect } from "next/navigation";
+
 import getSession from "@/lib/getSession";
 
 
 import Link from "next/link";
+import CheckoutButton from "@/components/CheckoutButton";
 
 export default async function Page({params}) {
 
 
   const session = await getSession();
   const user = session?.user;
-  if(!user){
-    redirect("/api/auth/signin?callbackUrl=/events/create")
-  }
+
   
 
   const event = await prisma.event.findUnique({
@@ -29,7 +27,7 @@ export default async function Page({params}) {
       <main className="flex-1 py-12 md:py-16 lg:py-20">
       <div className="container mx-auto max-w-5xl flex items-center justify-between">
           <h1 className="text-3xl font-bold">{event.name}</h1>
-          {user.role === 'admin' && (
+          {user?.role === 'admin' && (
             <Link href={`/events/${event.id}/update`} className="ml-4">
               Edit Event
             </Link>
@@ -74,11 +72,9 @@ export default async function Page({params}) {
                 </div>
                 <div>
                   <h2 className="text-2xl font-semibold">Sign Up</h2>
-                  <form className="mt-4 space-y-4">
-                    <Button type="submit" className="w-full">
-                      Sign Up
-                    </Button>
-                  </form>
+                  
+                   <CheckoutButton event={event} user={user}/>
+                  
                 </div>
               </div>
             </div>

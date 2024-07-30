@@ -1,9 +1,12 @@
-import { signIn } from "@/auth";
+
 import Link from "next/link";
-import { Button } from "./ui/button";
+
 import UserButton from "./UserButton";
 import getSession from "@/lib/getSession";
 import { Calendar } from "lucide-react";
+import SignInButton from "./SignInButton";
+
+
 
 export default async function Navbar() {
   const session = await getSession();
@@ -45,22 +48,10 @@ export default async function Navbar() {
        
       </nav>
       <div className="ml-4">
-      {user ? <UserButton  user={user} /> : <SignInButton />}
+      {user ? <UserButton  user={user} /> : <SignInButton/>}
       </div>
       
     </header>
   );
 }
 
-function SignInButton() {
-  return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn();
-      }}
-    >
-      <Button type="submit">Sign In</Button>
-    </form>
-  );
-}
