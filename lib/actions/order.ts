@@ -43,7 +43,7 @@ export async function createOrder(values: CreateOrderValues) {
     eventId,
     buyerId,
     totalAmount,
-  } = createOrderSchema.parse(values);
+createdAt} = createOrderSchema.parse(values);
 
   console.log(values);
 
@@ -54,7 +54,7 @@ export async function createOrder(values: CreateOrderValues) {
       eventId,
       buyerId,
       totalAmount,
-      createdAt: new Date(),
+      createdAt,
     },
   });
 

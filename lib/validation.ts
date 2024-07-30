@@ -28,6 +28,7 @@ export const createOrderSchema = z.object({
   eventId: z.string(),
   buyerId: z.string(),
   totalAmount: z.coerce.number(),
+  createdAt: z.date()
 });
 
 export type CreateOrderValues = z.infer<typeof createOrderSchema>;
