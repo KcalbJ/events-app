@@ -44,7 +44,7 @@ export default function Component() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
               <div className="flex flex-col items-center justify-center space-y-4">
                 <Avatar className="w-24 h-24">
-                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarImage src="/placeholder-user.svg" />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="text-center space-y-1">
@@ -58,7 +58,7 @@ export default function Component() {
               </div>
               <div className="flex flex-col items-center justify-center space-y-4">
                 <Avatar className="w-24 h-24">
-                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarImage src="/placeholder-user.svg" />
                   <AvatarFallback>JA</AvatarFallback>
                 </Avatar>
                 <div className="text-center space-y-1">
@@ -72,7 +72,7 @@ export default function Component() {
               </div>
               <div className="flex flex-col items-center justify-center space-y-4">
                 <Avatar className="w-24 h-24">
-                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarImage src="/placeholder-user.svg" />
                   <AvatarFallback>KS</AvatarFallback>
                 </Avatar>
                 <div className="text-center space-y-1">
