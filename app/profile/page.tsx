@@ -3,8 +3,10 @@ import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import getSession from "@/lib/getSession";
 import AddToCalendarButton from "@/components/AddToCalanderButton";
+import { Card } from "@/components/ui/card"
 
-
+import Link from "next/link";
+import { formatDateTime } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Profile",
 };
@@ -35,17 +37,28 @@ export default async function Page() {
   );
 
   return (
-    <main className="mx-auto my-10 space-y-3">
-      <h1 className="text-center text-xl font-bold">Profile Page</h1>
-      <div className="space-x-4 text-center mt-6">
+    <div className="bg-background text-foreground min-h-screen flex flex-col">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1">
+        <h1 className="text-3xl font-bold mb-6">My Orders</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {ordersWithEvents.map((orderWithEvent) => (
-          <div key={orderWithEvent.id}>
-            <p>Order Total Amount: {orderWithEvent.totalAmount}</p>
-            <p>Event Name: {orderWithEvent.event?.name}</p>
-            <AddToCalendarButton orderWithEvent={orderWithEvent} />
-          </div>
+          <Card className="bg-card text-card-foreground p-6 rounded-lg shadow-lg">
+            <div className="flex flex-col gap-4">
+              <div>
+              <h2 className="text-lg font-semibold">{orderWithEvent.event.name}</h2>
+              <p className="text-muted-foreground">
+                {formatDateTime(orderWithEvent.event.startDateTime)} - {formatDateTime(orderWithEvent.event.endDateTime)}
+              </p>
+              </div>
+              <Link href={`/events/${orderWithEvent.event.id}`} className="text-primary hover:underline" prefetch={false}>
+                View Details
+                </Link>
+                <AddToCalendarButton orderWithEvent={orderWithEvent} />
+            </div>
+          </Card>
         ))}
-      </div>
-    </main>
+        </div>
+      </main>
+    </div>
   );
 }

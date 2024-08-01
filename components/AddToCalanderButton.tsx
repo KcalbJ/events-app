@@ -29,7 +29,7 @@ const AddToCalendarButton = ({ orderWithEvent }) => {
   return (
     <Button
       size="lg"
-      className="button col-span-2 w-full"
+      className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       onClick={handleAddToCalendar}
     >
       Add to calendar
