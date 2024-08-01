@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card"
 import Link from "next/link";
 import { formatDateTime } from "@/lib/utils";
 export const metadata: Metadata = {
-  title: "Profile",
+  title: "My events",
 };
 
 export default async function Page() {
@@ -42,7 +42,7 @@ export default async function Page() {
         <h1 className="text-3xl font-bold mb-6">My Orders</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {ordersWithEvents.map((orderWithEvent) => (
-          <Card className="bg-card text-card-foreground p-6 rounded-lg shadow-lg">
+          <Card key={orderWithEvent.id} className="bg-card text-card-foreground p-6 rounded-lg shadow-lg">
             <div className="flex flex-col gap-4">
               <div>
               <h2 className="text-lg font-semibold">{orderWithEvent.event.name}</h2>
