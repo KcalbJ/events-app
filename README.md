@@ -1,24 +1,146 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Events Project
 
-## Getting Started
+## Description
 
-First, run the development server:
+This project is a web application for managing events, integrating features like user authentication, database management, Google Calendar for scheduling, and Stripe for payment processing.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Next.js**: React framework for server-side rendering and static site generation.
+- **Auth.js**: Authentication library for managing user sessions.
+- **Prisma**: ORM (Object-Relational Mapping) tool for database access.
+- **PostgreSQL**: Relational database for storing application data.
+- **Google Calendar API**: For event scheduling and calendar management.
+- **Stripe API**: For handling payments.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Prerequisites
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Node.js (version 14.x or above)
+- PostgreSQL
+- Google Cloud account (for Google Calendar API)
+- Stripe account (for payment processing)
+
+## Installation
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/KcalbJ/events-app.git
+    cd events-project
+    ```
+
+2. **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+3. **Set up environment variables:**
+
+    Create a `.env` file in the root of your project and add the following environment variables:
+
+    ```env
+    POSTGRES_URL
+    POSTGRES_PRISMA_URL
+    POSTGRES_URL_NO_SSL
+    POSTGRES_URL_NON_POOLING
+    POSTGRES_USER
+    POSTGRES_HOST
+    POSTGRES_PASSWORD
+    POSTGRES_DATABASE
+
+    AUTH_SECRET
+
+    AUTH_GOOGLE_ID
+    AUTH_GOOGLE_SECRET
+
+    AUTH_RESEND_KEY
+
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+    STRIPE_SECRET_KEY
+    STRIPE_WEBHOOK_SECRET
+
+    NEXT_PUBLIC_SERVER_URL
+    ```
+
+4. **Set up the PostgreSQL database:**
+
+    Make sure PostgreSQL is running on your local machine. You can use a tool like pgAdmin to connect to the provided database URL.
+
+5. **Run Prisma migrations:**
+
+    ```bash
+    npx prisma migrate dev --name init
+    ```
+
+6. **Seed the database (optional):**
+
+    ```bash
+    npx prisma db seed
+    ```
+
+7. **Generate Prisma client:**
+
+    ```bash
+    npx prisma generate
+    ```
+
+## Running the Project Locally
+
+1. **Start the development server:**
+
+    ```bash
+    npm run dev
+    ```
+
+2. **Access the application:**
+
+    Open your browser and go to `http://localhost:3000`.
+
+## Google Calendar Integration
+
+To use Google Calendar API, you need to set up OAuth 2.0 credentials in the Google Cloud Console. 
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create a new project or select an existing project.
+3. Navigate to the OAuth consent screen and configure it.
+4. Go to Credentials and create OAuth 2.0 Client IDs.
+5. Set the authorized redirect URIs to `http://localhost:3000/api/auth/callback/google`.
+6. Copy the Client ID and Client Secret to your `.env` file.
+
+## Stripe Integration
+
+To use Stripe for payment processing:
+
+1. Sign in to your Stripe account and get your API keys from the [Stripe Dashboard](https://dashboard.stripe.com/apikeys).
+2. Add the API keys to your `.env` file.
+
+## Additional Scripts
+
+- **Build the project:**
+
+    ```bash
+    npm run build
+    ```
+
+- **Start the production server:**
+
+    ```bash
+    npm start
+    ```
+
+- **Lint the code:**
+
+    ```bash
+    npm run lint
+    ```
+
+- **Format the code:**
+
+    ```bash
+    npm run format
+    ```
+
 
 ## Learn More
 
