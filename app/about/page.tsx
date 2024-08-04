@@ -12,20 +12,20 @@ export default function Component() {
               <div className="flex flex-col items-start space-y-4">
                 <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">About Our Events</div>
                 <h1 className="lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl xl:text-[3.4rem] 2xl:text-[3.75rem]">
-                  Evntualy: Bringing the Best Events to You
+                Eventually: Bringing the Best Events to You
                 </h1>
                 <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                  At Evntualy, we are dedicated to hosting exceptional events that bring together industry leaders,
+                  At Eventually, we are dedicated to hosting exceptional events that bring together industry leaders,
                   innovators, and passionate individuals. Our events are designed to inspire, educate, and foster
                   meaningful connections within the software development community.
                 </p>
               </div>
               <div className="flex justify-center">
                 <img
-                  src="/placeholder.svg"
+                  src="https://media.istockphoto.com/id/1480245186/photo/camera-crew-with-professional-camera-in-studio.jpg?s=612x612&w=0&k=20&c=2f17aEbEkPrDUm7QmhZya5CXpYKQo6NDfEIirqn9_Z0="
                   width="200"
                   height="200"
-                  alt="Acme Inc Events"
+                  alt="Camera for events app"
                   className="w-full max-w-[400px]"
                 />
               </div>

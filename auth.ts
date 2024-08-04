@@ -19,7 +19,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           scope: "openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/calendar",
         },
       },
-    }), Resend({ from: "no-reply@jblack.dev"}) ], callbacks: {
+    }),] //Resend({ from: "no-reply@jblack.dev"}) ]
+    , 
+    callbacks: {
       async session({ session, user }) {
         const [googleAccount] = await prisma.account.findMany({
           where: { userId: user.id, provider: "google" },

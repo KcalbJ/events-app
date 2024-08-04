@@ -1,67 +1,49 @@
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { Mail, MapPinned, Phone } from "lucide-react"
+import Link from "next/link"
 export default function Page() {
   return (
-    <div className="w-full max-w-6xl mx-auto py-12 md:py-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-        <div className="space-y-6">
-          
-            <h2 className="text-3xl font-bold">Contact Us</h2>
-            <p className="text-muted-foreground">Get in touch with our team for any inquiries or support.</p>
-          
-          <div className="space-y-4">
-            <div className="flex items-start gap-4">
-              <MapPinned className="mt-1 text-primary" />
-              <div>
-                <h3 className="font-medium">Address</h3>
-                <p className="text-muted-foreground">123 Main St, Anytown USA 12345</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <Phone className="mt-1 text-primary" />
-              <div>
-                <h3 className="font-medium">Phone</h3>
-                <p className="text-muted-foreground">(0123) 456-789</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <Mail className="mt-1 text-primary" />
-              <div>
-                <h3 className="font-medium">Email</h3>
-                <p className="text-muted-foreground">info@events-app.com</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="space-y-6">
+    <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+    <div className="max-w-3xl mx-auto space-y-6">
+      <div className="text-center">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Get in Touch</h1>
+        <p className="mt-4 text-lg text-muted-foreground">
+          Have a question or need help? Don't hesitate to reach out.
+        </p>
+      </div>
+      <div className="bg-card rounded-lg shadow-lg p-6 sm:p-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <h2 className="text-3xl font-bold">Get in Touch</h2>
-            <p className="text-muted-foreground">
-              Fill out the form below and well get back to you as soon as possible.
-            </p>
+            <h3 className="text-lg font-semibold">Email</h3>
+            <a href="#" className="text-primary hover:underline">
+              support@eventapp.com
+            </a>
           </div>
-          <form className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Name</Label>
-                <Input id="name" placeholder="Enter your name" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" type="email" placeholder="Enter your email" />
-              </div>
+          <div>
+            <h3 className="text-lg font-semibold">Phone</h3>
+            <a href="#" className="text-primary hover:underline">
+              +44 (777) 777-7777
+            </a>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold">Social</h3>
+            <div className="flex gap-4">
+              <Link href="#" className="text-primary hover:underline" prefetch={false}>
+                Twitter
+              </Link>
+              <Link href="#" className="text-primary hover:underline" prefetch={false}>
+                Facebook
+              </Link>
+              <Link href="#" className="text-primary hover:underline" prefetch={false}>
+                Instagram
+              </Link>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="message">Message</Label>
-              <Textarea id="message" placeholder="Enter your message" className="min-h-[120px]" />
-            </div>
-            <Button type="submit">Send Message</Button>
-          </form>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold">Address</h3>
+            <p className="text-muted-foreground">123 App Street, Anytown UK 12345</p>
+          </div>
         </div>
       </div>
     </div>
-  )
+  </main>
+)
 }

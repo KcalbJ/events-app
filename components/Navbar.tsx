@@ -13,33 +13,34 @@ export default async function Navbar() {
   const user = session?.user;
 
   return (
-    <header className="px-4 lg:px-6 h-14 flex items-center">
+    <header className="px-4 lg:px-6 h-14 flex items-center font-bold bg-primary">
       <Link
         href="/"
-        className="flex items-center justify-center"
+        className="flex items-center justify-center gap-4 text-xl text-primary-foreground hover:underline underline-offset-4 "
         prefetch={false}
       >
         <Calendar className="size-6" />
         <span className="sr-only">Community Events</span>
+        Eventually
       </Link>
-      <nav className="ml-auto flex gap-4 sm:gap-6">
+      <nav className="ml-auto flex gap-4 text-primary-foreground sm:gap-6">
         <Link
           href="/events"
-          className="text-sm font-medium hover:underline underline-offset-4"
+          className="text-m font-medium hover:underline underline-offset-4 "
           prefetch={false}
         >
           Events
         </Link>
         <Link
           href="/about"
-          className="text-sm font-medium hover:underline underline-offset-4"
+          className="text-m font-medium hover:underline underline-offset-4 "
           prefetch={false}
         >
           About
         </Link>
         <Link
           href="/contact"
-          className="text-sm font-medium hover:underline underline-offset-4"
+          className="text-m font-medium hover:underline underline-offset-4 "
           prefetch={false}
         >
           Contact
@@ -47,7 +48,7 @@ export default async function Navbar() {
 
        
       </nav>
-      <div className="ml-4">
+      <div className="ml-4 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]">
       {user ? <UserButton  user={user} /> : <SignInButton/>}
       </div>
       
