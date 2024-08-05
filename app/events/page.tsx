@@ -8,17 +8,13 @@ import { Badge } from '@/components/ui/badge';
 import { Calendar, Clock } from 'lucide-react';
 import { formatDate, formatTime } from '@/lib/utils';
 import { fetchEvents } from './action';
-import { Event } from '@prisma/client'; 
-type PageProps = {
-  initialEvents: Event[];
-};
 
-export default function Page({ initialEvents }: PageProps) {
+export default function Page({ params }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || '';
   
-  const [events, setEvents] = useState<Event[]>(initialEvents || []);
+  const [events, setEvents] = useState(params || []);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
   useEffect(() => {
