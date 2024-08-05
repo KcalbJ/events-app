@@ -28,7 +28,7 @@ export default async function Page({params}) {
       <div className="container mx-auto max-w-5xl flex items-center justify-between">
           <h1 className="text-3xl font-bold">{event.name}</h1>
           {user?.role === 'admin' && (
-            <Link href={`/events/${event.id}/update`} className="ml-4">
+            <Link href={`/events/${event.id}/update`} className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
               Edit Event
             </Link>
           )}
@@ -42,11 +42,13 @@ export default async function Page({params}) {
                   <div className="text-muted-foreground mt-2">
                     <div className="flex items-center gap-2">
                       <Calendar className="w-5 h-5" />
-                      <span>June 1, 2024</span>
+                      <span>{new Date(event.startDateTime).toLocaleDateString()}</span>
+                      <span>- {new Date(event.endDateTime).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                       <Clock className="w-5 h-5" />
                       <span>{new Date(event.startDateTime).toLocaleTimeString()}</span>
+                      <span>- {new Date(event.endDateTime).toLocaleTimeString()}</span>
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                       <MapPinned className="w-5 h-5" />
@@ -65,15 +67,15 @@ export default async function Page({params}) {
                   <div className="text-muted-foreground mt-2">
                     <div className="flex items-center gap-2">
                       <TicketIcon className="w-5 h-5" />
-                      <span>Price: {event.price}</span>
+                      <span>£ {event.price}</span>
                     </div>
                    
                   </div>
                 </div>
                 <div>
-                  <h2 className="text-2xl font-semibold">Sign Up</h2>
+                  <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
                   
-                   <CheckoutButton event={event} user={user}/>
+                   <CheckoutButton  event={event} user={user}/>
                   
                 </div>
               </div>
@@ -84,7 +86,7 @@ export default async function Page({params}) {
                 width={800}
                 height={600}
                 alt="Event Image"
-                className="rounded-lg object-cover w-full h-full"
+                className="rounded-lg shadow-lg object-cover w-full h-full"
               />
             </div>
           </div>

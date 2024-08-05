@@ -6,7 +6,7 @@ export default function Page() {
       <div className="text-center">
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Get in Touch</h1>
         <p className="mt-4 text-lg text-muted-foreground">
-          Have a question or need help? Don't hesitate to reach out.
+          Have a question or need help? Dont hesitate to reach out.
         </p>
       </div>
       <div className="bg-card rounded-lg shadow-lg p-6 sm:p-8">

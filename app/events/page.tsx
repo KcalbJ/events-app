@@ -60,11 +60,11 @@ export default function Page({ initialEvents }) {
         </div>
       </section>
       <main className="flex-1 gap-8 p-4 md:p-6">
-        <div className="grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-1  container  lg:grid-cols-3 gap-4 md:gap-6">
           {events.map((event) => (
             <Card
               key={event.id}
-              className="bg-background rounded-lg overflow-hidden shadow-sm"
+              className="bg-background  rounded-lg overflow-hidden shadow-sm"
             >
               <img
                 src={event.imgUrl || '/placeholder.svg'}

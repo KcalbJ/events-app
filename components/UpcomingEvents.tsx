@@ -76,7 +76,7 @@ export default async function UpcomingEvents() {
                 </p>
                 <Link
                   href={`/events/${event.id}`}
-                  className="h-9 px-4 rounded-md text-center align-center justify-center bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                  className="inline-flex items-center justify-center h-9 px-4 rounded-md bg-primary text-primary-foreground text-sm font-medium transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                 >
                   Learn More
                 </Link>

@@ -65,8 +65,8 @@ export default async function Home() {
       >
         <Card className="border-0 rounded-none shadow-none cursor-pointer">
           <CardContent className="p-0">
-            <div className="bg-secondary rounded-t-lg p-4 text-secondary-foreground">
-              <Dumbbell className="w-8 h-8" />
+          <div className="bg-primary rounded-t-lg p-4 text-accent-foreground">
+              <Dumbbell className="w-8 h-8 text-white" />
             </div>
             <div className="p-4">
               <div className="text-lg font-medium">Sports</div>
@@ -82,8 +82,8 @@ export default async function Home() {
       >
         <Card className="border-0 rounded-none shadow-none cursor-pointer">
           <CardContent className="p-0">
-            <div className="bg-accent rounded-t-lg p-4 text-accent-foreground">
-              <Palette className="w-8 h-8" />
+          <div className="bg-primary rounded-t-lg p-4 text-accent-foreground">
+              <Palette className="w-8 h-8 text-white" />
             </div>
             <div className="p-4">
               <div className="text-lg font-medium">Art</div>
@@ -99,8 +99,8 @@ export default async function Home() {
       >
         <Card className="border-0 rounded-none shadow-none cursor-pointer">
           <CardContent className="p-0">
-            <div className="bg-muted rounded-t-lg p-4 text-muted-foreground">
-              <Croissant className="w-8 h-8" />
+            <div className="bg-primary rounded-t-lg p-4 text-accent-foreground">
+              <Croissant className="w-8 h-8 text-white" />
             </div>
             <div className="p-4">
               <div className="text-lg font-medium">Food</div>
@@ -116,8 +116,8 @@ export default async function Home() {
       >
         <Card className="border-0 rounded-none shadow-none cursor-pointer">
           <CardContent className="p-0">
-            <div className="bg-success rounded-t-lg p-4 text-success-foreground">
-              <School className="w-8 h-8" />
+          <div className="bg-primary rounded-t-lg p-4 text-accent-foreground">
+              <School className="w-8 h-8 text-white" />
             </div>
             <div className="p-4">
               <div className="text-lg font-medium">Education</div>
@@ -133,8 +133,8 @@ export default async function Home() {
       >
         <Card className="border-0 rounded-none shadow-none cursor-pointer">
           <CardContent className="p-0">
-            <div className="bg-warning rounded-t-lg p-4 text-warning-foreground">
-              <Users className="w-8 h-8" />
+          <div className="bg-primary rounded-t-lg p-4 text-accent-foreground">
+              <Users className="w-8 h-8 text-white" />
             </div>
             <div className="p-4">
               <div className="text-lg font-medium">Community</div>
