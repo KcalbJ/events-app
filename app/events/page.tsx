@@ -9,12 +9,16 @@ import { Calendar, Clock } from 'lucide-react';
 import { formatDate, formatTime } from '@/lib/utils';
 import { fetchEvents } from './action';
 
-export default function Page({ params }) {
+
+
+export default function Page() {
+
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialCategory = searchParams.get('category') || '';
   
-  const [events, setEvents] = useState(params || []);
+  const [events, setEvents] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
 
   useEffect(() => {
